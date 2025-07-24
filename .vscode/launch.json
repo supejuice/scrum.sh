@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "zshdb",
+            "request": "launch",
+            "name": "Debug scrum.sh",
+            "program": "${workspaceFolder}/scrum.sh",
+            "cwd": "${workspaceFolder}",
+            "args": [],
+            "env": {}
+        }
+    ]
+}
