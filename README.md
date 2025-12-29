@@ -1,17 +1,13 @@
 # scrum.sh
 
-This project provides a Bash script to generate a daily summary of Git commits for a specified repository and author.
+This project provides a Bash script to generate a 30-day summary of unique Git commits (by the current user) across all local and remote branches for a specified repository.
 
 ## Usage
 
 1. Make sure you have Bash (v4 or v5 recommended for debugging) and Git installed on your system.
 2. Run the script:
-   ```bash
-   bash scrum.sh
-   ```
-   Or use Zsh:
    ```zsh
-   zsh scrum.sh
+   sh ./scrum.sh
    ```
 3. When prompted:
    ```
@@ -23,21 +19,28 @@ This project provides a Bash script to generate a daily summary of Git commits f
 - For Bash debugging, use the Bash Debug extension (requires Bash v4 or v5).
 - For Zsh, use the Zsh Debug extension. Input is entered in the integrated terminal or debug console when prompted.
 
-The script will display a summary of your commits for the current day (or previous day if run before noon), with weekend adjustments to show Friday's commits.
+The script will display a summary of your unique commits from the last 30 days, grouped by date, across all local and remote branches.
 
 ## Features
 - Works on both macOS and Linux
 - Automatically detects your Git author email
-- Handles weekend logic to show Friday's summary
+- Shows unique commits from all local and remote branches
+- Groups commits by date for the last 30 days
 
 ## Output Example
 ```
-🚀 What we did on 2025-07-24
+🚀 Updates from the last 30 days
 ===========================================
-Start Timestamp: 2025-07-24T00:00:00
-End Timestamp: 2025-07-24T23:59:59
+
+📅 2025-07-24
+----------------------
 - Commit message 1
 - Commit message 2
+
+📅 2025-07-23
+----------------------
+- Commit message 3
+
 ===========================================
 ✅ **End of Update**
 ```
