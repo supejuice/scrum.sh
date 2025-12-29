@@ -38,14 +38,23 @@ START_TIMESTAMP="${START_DATE}T00:00:00"
 END_TIMESTAMP="${START_DATE}T23:59:59"
 
 echo "🚀 What we did on ${START_DATE}"
+echo "🚀 Updates from the last 30 days"
 echo "==========================================="
-echo "Start Timestamp: $START_TIMESTAMP"
-echo "End Timestamp: $END_TIMESTAMP"
 
-{
-    git -C "$REPO1_PATH" log --author="$AUTHOR" --since="$START_TIMESTAMP" --until="$END_TIMESTAMP" \
-        --pretty=format:"- %s" --abbrev-commit --no-merges --date=local
-} | sort | uniq
 
-echo "==========================================="
+# List updates from the last 30 days, grouped by date, from all local and remote branches, only unique commits, sorted by date
+git -C "$REPO1_PATH" log --all --author="$AUTHOR" --since="30 days ago" --pretty=format:"%H	%ad	%s" --abbrev-commit --no-merges --date=short |
+    sort -k2,2 -k1,1 | uniq |
+    awk -F'\t' '
+    {
+        if (date != $2) {
+            if (NR != 1) print "";
+            date = $2;
+            print "\n📅 " date;
+            print "----------------------";
+        }
+        print "- " $3;
+    }'
+
+echo "\n==========================================="
 echo "✅ **End of Update**"
